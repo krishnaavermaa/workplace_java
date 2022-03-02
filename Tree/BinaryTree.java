@@ -4,7 +4,7 @@ import java.util.Queue;
 
 
 public class BinaryTree {
-	Node root;
+	private Node root;
 
 	private class Node {
 		int data;
@@ -20,6 +20,10 @@ public class BinaryTree {
 	public static void main(String[] args) {
 		BinaryTree bt = new BinaryTree();
 		bt.create();
+		System.out.println("tree height: "+bt.height());
+		System.out.println("nodes count: "+bt.count());
+		bt.display();
+		bt.inorder();
 	}
 
 	void create()
@@ -50,6 +54,90 @@ public class BinaryTree {
 				q.offer(temp.right);
 			}
 		}
+		System.out.println();
+	}
+	
+	int height()
+	{
+		return height(root);
+	}
+	int height(Node node)
+	{
+		int left=0,right=0;
+		if(node.left!=null)
+			left=height(node.left);
+	    if(node.right!=null)
+	    	right=height(node.right);
+		if(left>right) return left+1;
+		if(right>left) return right+1;
+		return left+1;
+	}
+	
+	int level(Node node)
+	{
+		return height(node)-1;
+	}
+	
+	void display()
+	{
+		Queue <Node>q=new LinkedList<>();
+		q.offer(root);
+		while(!q.isEmpty())
+		{
+			Node temp=q.poll();
+			System.out.print(temp.data+" ");
+			if(temp.left!=null) q.offer(temp.left);
+			if(temp.right!=null) q.offer(temp.right);
+		}
+		System.out.println();
+	}
+	
+	void inorder()
+	{
+		System.out.println("Inorder:");
+		inorder(root);
+	}
+	void inorder(Node node)
+	{
+		if(node.left!=null) inorder(node.left);
+		System.out.print(node.data+" ");
+		if(node.right!=null) inorder(node.right);
+	}
+	
+	void preorder()
+	{
+		System.out.println("preorder:");
+		preorder(root);
+	}
+	void preorder(Node node)
+	{
+		if(node.left!=null) preorder(node.left);
+		if(node.right!=null) preorder(node.right);
+		System.out.print(node.data+" ");
+	}
+	
+	void postorder()
+	{
+		System.out.println("postorder:");
+		postorder(root);
+	}
+	void postorder(Node node)
+	{
+		System.out.print(node.data+" ");
+		if(node.left!=null) postorder(node.left);
+		if(node.right!=null) postorder(node.right);
+	}
+	
+	int count()
+	{
+		return count(root);
+	}
+	int count(Node node)
+	{
+		int x=0,y=0;
+		if(node.left!=null) x=count(node.left);
+		if(node.right!=null) y=count(node.right);
+		return x+y+1;
 	}
 
 }
