@@ -1,3 +1,4 @@
+package tree;
 import java.util.Scanner;
 
 public class Heapify extends Heap{

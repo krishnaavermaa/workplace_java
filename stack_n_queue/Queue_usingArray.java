@@ -1,3 +1,4 @@
+package stack_n_queue;
 import java.util.*;
 import java.lang.reflect.Array;
 
